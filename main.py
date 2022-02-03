@@ -44,7 +44,10 @@ ds=pd.read_csv("aug_train.csv")
 #vidimo da je korelacija 0.07, sto nam govori da rod nema velik efekat na rezultat
 #popunjavamo kolonu rod sa istom raspodjelom kao i trenutna-90.2% musko, 8.4% zensko, 1.3% other
 #popunjavamo na ovaj nacin jer odlucivanjem za samo jedno opciju npr. svi elementi musko izaziva +23% disbalansa
-
+dim=ds.shape
+for i in range(dim[0]):
+    if pd.isna(ds.at[i,'gender']):
+        ds.at[i,'gender']=np.random.choice(['Male','Female','Other'],p=[0.9,0.08,0.02])
 
 
 
