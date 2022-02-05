@@ -30,21 +30,15 @@ ds=pd.read_csv("aug_train.csv")
 # print(x)
 
 #izbacujemo sve osobe koji imaju 5 ili vise nepopunjenih informacija- gubimo oko 250 redova sto je prihvatljivo
-for i in range(ds.shape[0]-1):
-    if i==ds.shape[0]-1:
-        break
-    if ds.iloc[i, ].isnull().sum()>=5:
-        ds=ds.drop(ds.index[i],axis=0)
-        i=i-1
+ds=ds.dropna(axis=0,thresh=5)
 
-
-empty=[]
-for i in ds:
-    empty.append([ds[i].isnull().sum(),i])
-empty.sort(reverse=True)
-for i in range(len(empty)):
-    empty[i][0]/=ds.shape[0]
-print(empty)
+# empty=[]
+# for i in ds:
+#     empty.append([ds[i].isnull().sum(),i])
+# empty.sort(reverse=True)
+# for i in range(len(empty)):
+#     empty[i][0]/=ds.shape[0]
+# print(empty)
 #najvise nedostajucih podataka je: company_type 31%, company_size 30%, gender 22%, major_discipline 13%
 # last new job 1% education level 1% i enrolled university 1.4%,experience 0.2%
 #na prvi pogled logicki je zakljuciti da parametri: last new job, enrolled university,company_size igraju vecu ulogu
@@ -62,14 +56,14 @@ print(empty)
 #popunjavamo kolonu rod sa istom raspodjelom kao i trenutna-90.2% musko, 8.4% zensko, 1.3% other
 #popunjavamo na ovaj nacin jer odlucivanjem za samo jedno opciju npr. svi elementi musko izaziva +23% disbalansa
 
-# for i in range(dim[0]):
-#     if pd.isna(ds.at[i,'gender']):
-#         ds.at[i,'gender']=np.random.choice(['Male','Female','Other'],p=[0.9,0.08,0.02])
+for i in range(ds.shape[0]):
+    if pd.isna(ds.at[ds.index[i],'gender']):
+        ds.at[ds.index[i],'gender']=np.random.choice(['Male','Female','Other'],p=[0.9,0.08,0.02])
 
+#najvise nedostajucih podataka je: company_type 31%, company_size 30%, major_discipline 13%
+# last new job 1% education level 1% i enrolled university 1.4%,experience 0.2%
+#uklanjamo sve elemente koji nemaju last new job, education level, experience ili enrolled university (gubimo oko 4% seta)
 
-#ENROLLED UNIVERSITY
-# print(ds['enrolled_university'].value_counts())
-# rod=ds.loc[:,["enrolled_university","target"]]
-# rod['enrolled_university']=rod['enrolled_university'].astype('category').cat.codes
-# print(rod.corr())
-#Korelacija je 0.14, a kako prazna polja cine 2% ukupnog dataseta, mozemo ih samo ukloniti bez gubitka previse podataka
+ds=ds.dropna(axis=0,subset=['experience','enrolled_university','last_new_job','education_level'])
+
+print(ds['company_type'].value_counts())
