@@ -66,4 +66,24 @@ for i in range(ds.shape[0]):
 
 ds=ds.dropna(axis=0,subset=['experience','enrolled_university','last_new_job','education_level'])
 
-print(ds['company_type'].value_counts())
+#print(ds['major_discipline'].value_counts())
+# rod=ds.loc[:,["company_type","target","company_size","major_discipline"]]
+# rod['company_type']=rod['company_type'].astype('category').cat.codes
+# rod['company_size']=rod['company_size'].astype('category').cat.codes
+# rod['major_discipline']=rod['major_discipline'].astype('category').cat.codes
+# rod['target']=rod['target'].astype('category').cat.codes
+# print(rod.corr())
+#iz korelacije preostalih podataka vidimo da su velicina i tip firme usko povezane
+#s obzirom da su bitne vrijednosti, najbolje je uvesti "Unknown" kako ne bi ugrozili integritet podataka
+
+ds['company_type'].fillna(value='Unknown',inplace=True)
+ds['company_size'].fillna(value='Unknown',inplace=True)
+print(ds['major_discipline'].value_counts())
+#major_discipline su raspoređeni 77% STEM, ostali jednocifreni i fali 15% materijala- popunicemo tim omjerima
+ds['major_discipline'].fillna(value=np.random.choice(["STEM","Humanities","Other","Business Degree","Arts","No Major"],p=[0.88,0.041,0.023,0.02,0.02,0.016]),inplace=True)
+print(ds['major_discipline'].value_counts())
+ds.to_csv("test_clean.csv")
+
+
+
+
