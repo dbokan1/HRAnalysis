@@ -82,7 +82,7 @@ print(ds['major_discipline'].value_counts())
 #major_discipline su raspoređeni 77% STEM, ostali jednocifreni i fali 15% materijala- popunicemo tim omjerima
 ds['major_discipline'].fillna(value=np.random.choice(["STEM","Humanities","Other","Business Degree","Arts","No Major"],p=[0.88,0.041,0.023,0.02,0.02,0.016]),inplace=True)
 print(ds['major_discipline'].value_counts())
-ds.to_csv("test_clean.csv")
+ds.to_csv("train_clean.csv")
 
 
 
