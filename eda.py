@@ -42,10 +42,10 @@ for i in relevant:
 # plt.xticks(rotation=45)
 # plt.show()
 
-
+#
 # sns.countplot(x=relevant.columns[0], alpha=0.7, data=relevant)
 # plt.show()
-#vidimo da oko 50% stanovnika dolazi iz dva grada, raspodjela je poprilicno nebalansirana, visoki peekovi u odnosu na ostatak
+#vidimo da oko 50% stanovnika dolazi iz dva grada, raspodjela je relativno nebalansirana, visoki peekovi u odnosu na ostatak, nekoliko zastupljenijih gradova
 #
 # sns.countplot(x=relevant.columns[1], alpha=0.7, data=relevant)
 # plt.show()
@@ -99,3 +99,10 @@ relevant["training_hours"]=relevant["training_hours"].astype('int')
 # sns.countplot(x=relevant.columns[12], alpha=0.7, data=relevant)
 # plt.show()
 #vidimo da 14000 osoba ima target 0, dok 4000 target 1
+
+#primjecujemo da ima nebalansiranih kolona, kao sto su major discipline, company_type, gender
+#problem disbalansiranih kolona je sto ce model pri treniranju stvoriti bias ka najzastupljenijim vrijednostima i kompromizirati integritet ucenja
+#jos jedan problem je koristenje accuracy metrike, za disbalansirane setove daje pogresne podatke i trebali bi koristiti neke druge
+# s obzirom da gender nije usko koreliran ni sa cim, prijedlog je tu kolonu izbaciti
+# major discipline je samo vezan za grad i univerzitet osobe, prijedlog je tu kolonu izbaciti
+#company_type je bitan za target ali je također disbalansiran- moramo ili ukloniti neke elemente ili duplirati manje zastupljene
