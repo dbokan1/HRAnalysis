@@ -80,21 +80,24 @@ ds['company_type'].fillna(value='Unknown',inplace=True)
 ds['company_size'].fillna(value='Unknown',inplace=True)
 #jos jedna opcija je umetanje najcesce opcije, da se dalje testirati
 
-print(ds['major_discipline'].value_counts())
+#print(ds['major_discipline'].value_counts())
 #major_discipline su raspoređeni 77% STEM, ostali jednocifreni i fali 15% materijala- popunicemo tim omjerima
 ds['major_discipline'].fillna(value=np.random.choice(["STEM","Humanities","Other","Business Degree","Arts","No Major"],p=[0.88,0.041,0.023,0.02,0.02,0.016]),inplace=True)
-print(ds['major_discipline'].value_counts())
+#print(ds['major_discipline'].value_counts())
 
 #training_hours numericki tip
-ds["training_hours"]=ds["training_hours"].astype('int')
-print("Mean: ",ds["training_hours"].mean())                   #srednja vrijednost 65.34
-print("Variance: ",ds["training_hours"].var())                #varijansa 3607
-print("Mode: ",ds["training_hours"].mode())                   #najvjerovatnija vrijednost 28
-print("Std:",ds["training_hours"].std())
-print(ds.shape)
+# ds["training_hours"]=ds["training_hours"].astype('int')
+# print("Mean: ",ds["training_hours"].mean())                   #srednja vrijednost 65.34
+# print("Variance: ",ds["training_hours"].var())                #varijansa 3607
+# print("Mode: ",ds["training_hours"].mode())                   #najvjerovatnija vrijednost 28
+# print("Std:",ds["training_hours"].std())
 ds=ds[(ds['training_hours'] < 250)]
-print(ds.shape)
 #mozemo ukloniti outliere koji ne pripadaju u 3eps zoni oko mean vrijednosti-vrijednosti od 240 i iznad (uklanjamo cca 600 osoba)
+ds["city_development_index"]=ds["city_development_index"].astype('double')
+up=ds["city_development_index"].mean()+3*ds["city_development_index"].std()
+down=ds["city_development_index"].mean()-3*ds["city_development_index"].std()
+ds=ds[(ds['city_development_index']-up<0)]
+ds=ds[(ds['city_development_index']-down>0)]
 
 ds.to_csv("train_clean.csv")
 
