@@ -53,6 +53,8 @@ ds=pd.concat([ds,primary,phd])
 encoded_columns = pd.get_dummies(ds['education_level'])
 ds = ds.join(encoded_columns).drop('education_level', axis=1)
 
+ds.to_csv("features_train.csv")
+
 
 
 
