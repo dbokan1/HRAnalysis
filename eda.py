@@ -11,23 +11,16 @@ for i in relevant:
     relevant[i]=relevant[i].astype('category').cat.codes
 
 
-relevant=relevant.drop("city",axis=1)
-relevant=relevant.drop("gender",axis=1)
-relevant=relevant.drop("company_type",axis=1)
-relevant=relevant.drop("experience",axis=1)
-relevant=relevant.drop("last_new_job",axis=1)
-relevant=relevant.drop("relevent_experience",axis=1)
-relevant=relevant.drop("major_discipline",axis=1)
-relevant=relevant.drop("training_hours",axis=1)
-
-
-corr=relevant.corr().abs()
-sns.heatmap(corr,
-        xticklabels=corr.columns,
-        yticklabels=corr.columns, annot=True)
+sns.pairplot(relevant, hue ='target')
 plt.show()
 
-corr=relevant.corr().abs()
+# corr=relevant.corr().abs()
+# sns.heatmap(corr,
+#         xticklabels=corr.columns,
+#         yticklabels=corr.columns, annot=True)
+# plt.show()
+#
+# corr=relevant.corr().abs()
 
 
 

@@ -45,13 +45,16 @@ ds=ds.drop("Unknown",axis=1)
 #one-hot enkodiranje enrolled university
 encoded_columns = pd.get_dummies(ds['enrolled_university'])
 ds = ds.join(encoded_columns).drop('enrolled_university', axis=1)
+ds=ds.drop("no_enrollment",axis=1)
 
 #mozemo uduplati primary school i phd kako bi imale relevantniju reprezentaciju
 phd=ds[ds["education_level"]=="Phd"]
 primary=ds[ds["education_level"]=="Primary School"]
 ds=pd.concat([ds,primary,phd])
+
 encoded_columns = pd.get_dummies(ds['education_level'])
 ds = ds.join(encoded_columns).drop('education_level', axis=1)
+ds=ds.drop("Graduate",axis=1)
 
 ds.to_csv("features_train.csv")
 
