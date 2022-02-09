@@ -19,20 +19,15 @@
 #izbacujemo: city, gender, relevent_experience, major_discipline, experience, company_type, last_new_job, training_hours
 
 
-#kategoricki one hot koding:
-# encoded_columns = pd.get_dummies(data['column'])
-# data = data.join(encoded_columns).drop('column', axis=1)
-
-
 import pandas as pd
 
-ds=pd.read_csv("train_clean.csv")
+ds=pd.read_csv("../resources/train_clean.csv")
 ds.drop(ds.columns[[0,1,2,4,5,8,9,11,12,13]], axis=1,inplace=True)
+
 
 #KODIRANJE PODATAKA
 
 ds["city_development_index"]=ds["city_development_index"].astype('double')
-
 
 #company_size ima 8 kategorija i jedna unknown-optimalno za sortirani dummy encoding, gdje cemo unknown izostaviti
 encoded_columns = pd.get_dummies(ds['company_size'])
@@ -52,4 +47,4 @@ encoded_columns = pd.get_dummies(ds['education_level'])
 ds = ds.join(encoded_columns).drop('education_level', axis=1)
 ds=ds.drop("Graduate",axis=1)
 
-#ds.to_csv("features_train.csv")
+#ds.to_csv("../resources/features_train.csv")

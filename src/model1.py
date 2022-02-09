@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 import pickle5 as pickle
 
-ds=pd.read_csv("features_train.csv")
+ds=pd.read_csv("../resources/features_train.csv")
 
 Y=ds["target"]
 X=ds.drop("target",axis=1)
@@ -70,7 +70,7 @@ for key in models.keys():
     roc_auc_test[key] = roc_auc_score(predictions, y_test)
     roc_auc_train[key] = roc_auc_score(pred_train, y_train)
 
-#filename='random_forest.sav'
+#filename='../resources/random_forest.sav'
 #pickle.dump(models['Random Forest'], open(filename, 'wb'))
 # loaded_model = pickle.load(open(filename, 'rb'))
 # print(loaded_model)

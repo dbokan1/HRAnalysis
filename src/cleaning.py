@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-ds=pd.read_csv("aug_train.csv")
+ds=pd.read_csv("../resources/aug_train.csv")
 
 # PROVJERA DUPLIKATA
 # duplicate=ds["enrollee_id"].duplicated()
@@ -98,7 +98,7 @@ ds=ds[(ds['city_development_index']-up<0)]
 ds=ds[(ds['city_development_index']-down>0)]
 
 
-#ds.to_csv("train_clean.csv")
+#ds.to_csv("../resources/train_clean.csv")
 
 
 

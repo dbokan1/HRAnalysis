@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 np.set_printoptions(threshold=sys.maxsize)
-ds=pd.read_csv("train_clean.csv")
+ds=pd.read_csv("../resources/train_clean.csv")
 relevant=ds.loc[:,"city":"target"]
 for i in relevant:
     relevant[i]=relevant[i].astype('category').cat.codes

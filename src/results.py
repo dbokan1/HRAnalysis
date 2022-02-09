@@ -27,7 +27,7 @@ def cleanFeatures(input):
 
     return id, ds
 
-# input=pd.read_csv("aug_test.csv")
+# input=pd.read_csv("../resources/aug_test.csv")
 # id, X=cleanFeatures(input)
 # model=pickle.load(open("random_forest.sav", 'rb'))
 # pred=model.predict(X)
@@ -36,7 +36,7 @@ def cleanFeatures(input):
 # rez.to_csv("aug_test_results.csv")
 
 def dajPrediction(id):
-    ds=pd.read_csv("aug_test_results.csv")
+    ds=pd.read_csv("../resources/aug_test_results.csv")
     x=ds[ds["enrollee_id"]==id]
     print(x)
 

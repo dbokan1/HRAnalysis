@@ -1,21 +1,17 @@
 import pandas
-import keras
 import numpy as np
-import seaborn as sns
 from imblearn.over_sampling import SMOTE
 from keras.models import Sequential
 from keras.layers import Dense
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score, classification_report
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score, classification_report, confusion_matrix
 import matplotlib.pyplot as plt
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import cross_val_score,KFold, StratifiedKFold, LeaveOneOut
+from sklearn.model_selection import cross_val_score,KFold, StratifiedKFold, LeaveOneOut, train_test_split, GridSearchCV
 import pickle5 as pickle
 
-ds=pandas.read_csv("features_train.csv")
+ds=pandas.read_csv("../resources/features_train.csv")
 Y=ds["target"]
 X=ds.drop("target",axis=1)
 smote = SMOTE()
@@ -38,7 +34,7 @@ def train_GS(model,params):
     print("Best Parameters : ", gsc.best_estimator_)
     y_pred=gsc_best.predict(X_test)
     metrics(y_pred,y_test)
-    filename = 'random_forest_tuned.sav'
+    filename = '../models/random_forest_tuned.sav'
     # pickle.dump(gsc_best, open(filename, 'wb'))
 
 #train_GS(LogisticRegression(random_state=123,solver='liblinear', penalty='l2', max_iter=5000),dict(C=np.logspace(1, 4, 10))) #sve oko 0.81
