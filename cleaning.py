@@ -1,7 +1,5 @@
 import numpy as np
 import pandas as pd
-import tensorflow as tf
-
 
 
 ds=pd.read_csv("aug_train.csv")
@@ -99,7 +97,8 @@ down=ds["city_development_index"].mean()-3*ds["city_development_index"].std()
 ds=ds[(ds['city_development_index']-up<0)]
 ds=ds[(ds['city_development_index']-down>0)]
 
-ds.to_csv("train_clean.csv")
+
+#ds.to_csv("train_clean.csv")
 
 
 

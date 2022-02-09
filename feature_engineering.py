@@ -23,11 +23,8 @@
 # encoded_columns = pd.get_dummies(data['column'])
 # data = data.join(encoded_columns).drop('column', axis=1)
 
-import sklearn
+
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import LabelEncoder
 
 ds=pd.read_csv("train_clean.csv")
 ds.drop(ds.columns[[0,1,2,4,5,8,9,11,12,13]], axis=1,inplace=True)
@@ -51,22 +48,8 @@ ds=ds.drop("no_enrollment",axis=1)
 phd=ds[ds["education_level"]=="Phd"]
 primary=ds[ds["education_level"]=="Primary School"]
 ds=pd.concat([ds,primary,phd])
-
 encoded_columns = pd.get_dummies(ds['education_level'])
 ds = ds.join(encoded_columns).drop('education_level', axis=1)
 ds=ds.drop("Graduate",axis=1)
 
-ds.to_csv("features_train.csv")
-
-
-
-
-
-
-
-
-# gle = LabelEncoder()
-# genre_labels = gle.fit_transform(ds['gender'])
-# genre_mappings = {index: label for index, label in
-#                   enumerate(gle.classes_)}
-# print(genre_mappings)
+#ds.to_csv("features_train.csv")
